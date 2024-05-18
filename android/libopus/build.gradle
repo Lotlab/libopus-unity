@@ -1,0 +1,30 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+	namespace 'org.lotlab.unity.libopus'
+	compileSdk 33
+	defaultConfig {
+		minSdk 21
+		targetSdk 33
+		versionCode 1
+		versionName "1.5.2"
+		externalNativeBuild {
+			cmake {
+				arguments "-DOPUS_BUILD_SHARED_LIBRARY=ON", "-DCMAKE_BUILD_TYPE=Release"
+			}
+		}
+	}
+	buildTypes {
+		release {
+			minifyEnabled true
+		}
+	}
+	externalNativeBuild {
+		cmake {
+			path "../../libopus/CMakeLists.txt"
+		}
+	}
+}
+

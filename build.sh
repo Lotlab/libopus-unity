@@ -26,6 +26,24 @@ build()
     cd ../../
 }
 
+build_android()
+{
+    if [ "$ANDROID_SDK_ROOT" = "" ]; then
+        echo "Android SDK is not found, skip android build."
+        return
+    fi
+
+    FILE_NAME="libopus/build/outputs/aar/libopus-release.aar"
+
+    cd android
+    if [ -x "$(command -v gradle)" ]; then
+        gradle build
+    else
+        ./gradlew build
+    fi
+    test -f $FILE_NAME && cp $FILE_NAME ../unity/Library/android/
+}
+
 OS=`uname -o`
 echo "OS: $OS"
 
@@ -37,4 +55,6 @@ if [ "$OS" = "Msys" ]; then
     build win-x86 Win32
     build win-x64 x64
 fi
+
+build_android
 
