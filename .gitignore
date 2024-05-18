@@ -1,2 +1,4 @@
 build/
 unity/Library/**/*.dll
+unity/Library/**/*.so
+unity/Library/**/*.aar
